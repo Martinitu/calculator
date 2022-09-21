@@ -28,8 +28,19 @@ let result
 
 let buttons = Array.from(document.getElementsByClassName("button"));
 
-let equals = function() {
-    
+function firstNumber(){
+    firstValue = displayValue;
+    displayValue = 0;
+    display.innerText = "";
+} 
+function secondNumber(){
+    secondValue = displayValue;
+    result = operate(operator, firstValue, secondValue);
+    let resultrounded = Math.round(result * 1000) /1000;
+    display.innerText = resultrounded;
+    firstValue = resultrounded
+    secondValue = 0;
+    displayValue = 0
 }
 
 buttons.map( button => {
@@ -43,9 +54,10 @@ buttons.map( button => {
             break
             case "=": 
                     secondValue = displayValue;
-                    result = operate(operator, firstValue, secondValue)
-                    display.innerText = result;
-                    firstValue = result
+                    result = operate(operator, firstValue, secondValue);
+                    let resultrounded = Math.round(result * 1000) /1000;
+                    display.innerText = resultrounded;
+                    firstValue = resultrounded
                     secondValue = 0;
                    
                     displayValue = 0;
@@ -55,62 +67,36 @@ buttons.map( button => {
             case "+": 
                         
                     if (firstValue == 0) {
-                        operator = add
-                        firstValue = displayValue;
-                        displayValue = 0;
-                        display.innerText = "";
-                    
+                        operator = add;
+                        firstNumber();
                     } else  {
-                        operator = add
-                        secondValue = displayValue;
-                        
-                        result = operate(operator, firstValue, secondValue)
-                        display.innerText = result;
-                        firstValue = result
-                        secondValue = 0;
-                        displayValue = 0
-                       
+                        operator = add;
+                        secondNumber();
                     } 
                     console.log(firstValue, secondValue, displayValue, operator)
             break
             case "-": 
                         
             if (firstValue == 0) {
-                operator = subtract
-                firstValue = displayValue;
-                displayValue = 0;
-                display.innerText = "";
+                operator = subtract;
+                firstNumber();
             
             } else  {
-                operator = subtract
-                secondValue = displayValue;
-                
-                result = operate(operator, firstValue, secondValue)
-                display.innerText = result;
-                firstValue = result
-                secondValue = 0;
-                displayValue = 0
+                operator = subtract;
+                secondNumber();
                
             } 
             console.log(firstValue, secondValue, displayValue, operator)
     break
     case "X": 
                         
-    if (firstValue == 0) {
-        operator = multiply
-        firstValue = displayValue;
-        displayValue = 0;
-        display.innerText = "";
+            if (firstValue == 0) {
+                operator = multiply;
+                firstNumber();
     
-    } else if (secondValue == 0 && displayValue != 0) {
-        operator = multiply
-        secondValue = displayValue;
-        
-        result = operate(operator, firstValue, secondValue)
-        display.innerText = result;
-        firstValue = result
-        secondValue = 0;
-        displayValue = 0
+            } else if (secondValue == 0 && displayValue != 0) {
+               operator = multiply;
+               secondNumber();
        
     } 
     console.log(firstValue, secondValue, displayValue, operator)
@@ -121,19 +107,11 @@ break
                         
     if (firstValue == 0) {
         operator = divide
-        firstValue = displayValue;
-        displayValue = 0;
-        display.innerText = "";
+        firstNumber();
     
     } else if (secondValue == 0 && displayValue != 0) {
         operator = divide
-        secondValue = displayValue;
-        
-        result = operate(operator, firstValue, secondValue)
-        display.innerText = result;
-        firstValue = result
-        secondValue = 0;
-        displayValue = 0
+        secondNumber();
        
     } 
     console.log(firstValue, secondValue, displayValue, operator)
